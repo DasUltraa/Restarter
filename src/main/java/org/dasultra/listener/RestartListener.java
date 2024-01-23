@@ -1,12 +1,12 @@
 package org.dasultra.listener;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.dasultra.file.FileManager;
 import org.dasultra.main.Main;
 
 public class RestartListener implements Listener {
@@ -28,10 +28,10 @@ public class RestartListener implements Listener {
                 Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Main.plugin, new Runnable() {
                     @Override
                     public void run() {
-                        Bukkit.broadcastMessage("§cDer Server wird in " + restartTime + " Sekunden neugestartet!");
+                        Bukkit.broadcastMessage(getMessage().replaceAll("%time%", String.valueOf(restartTime)));
                         if (restartTime < 6) {
                             for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-                                onlinePlayer.sendTitle("§cDer Server wird in " + restartTime + " Sekunden neugestartet!", "");
+                                onlinePlayer.sendTitle(getMessage().replaceAll("%time%", String.valueOf(restartTime)), "");
                             }
                         }
 
@@ -46,7 +46,7 @@ public class RestartListener implements Listener {
 
 
 
-                        if (restartTime < 0) {
+                        if (restartTime < 1) {
                             Bukkit.shutdown();
                         }
                     }
@@ -63,5 +63,11 @@ public class RestartListener implements Listener {
             onlinePlayer.playSound(onlinePlayer.getLocation(), sound, 1.0f, 1.0f);
         }
     }
+
+    public static String getMessage() {
+        FileManager manager = new FileManager("plugins/Restarter/config.yml");
+        return manager.getString("Message").replaceAll("&", "§");
+    }
+
 
 }

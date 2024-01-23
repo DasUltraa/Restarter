@@ -1,5 +1,5 @@
 name: Restarter
-version: '${version}'
+version: '1.1'
 main: org.dasultra.main.Main
 api-version: '1.20'
 authors: [DasUltra]
