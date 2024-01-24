@@ -52,7 +52,7 @@ public class RestartListener implements Listener {
                     }
                 }, 0, 20L);
             } else {
-                event.getPlayer().sendMessage("§cDu hast keine Rechte diesen Befehl ausführen!");
+                event.getPlayer().sendMessage(getNoPerm());
             }
         }
 
@@ -69,5 +69,9 @@ public class RestartListener implements Listener {
         return manager.getString("Message").replaceAll("&", "§");
     }
 
+    public static String getNoPerm() {
+        FileManager manager = new FileManager("plugins/Restarter/config.yml");
+        return manager.getString("NoPerm").replaceAll("&", "§");
+    }
 
 }

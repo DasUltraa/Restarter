@@ -20,6 +20,7 @@ public final class Main extends JavaPlugin {
 
         FileManager manager = new FileManager("plugins/Restarter/config.yml");
         manager.add("Message", "&cDer Server wird in %time% Sekunden neu gestartet!");
+        manager.add("NoPerm", "&cDu hast keine Rechte diesen Befehl auszuführen!");
 
         plugin = this;
         System.out.print("Restarter by DasUltra [Enabled]");
